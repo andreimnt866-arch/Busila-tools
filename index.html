@@ -1,0 +1,1036 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Business Fraud Red Flag Checker | The Busila Breakdown</title>
+  <meta name="description" content="Score any business or investment against 12 documented fraud red flags. Free tool from The Busila Breakdown — the documentary channel on business collapses.">
+  <style>
+    :root {
+      --navy:      #0A1628;
+      --navy-mid:  #0D1E38;
+      --navy-card: #0F2040;
+      --gold:      #D4AF37;
+      --gold-dim:  rgba(212,175,55,0.12);
+      --gold-line: rgba(212,175,55,0.25);
+      --bone:      #F5F0E8;
+      --red:       #C0392B;
+      --orange:    #E67E22;
+      --green:     #27AE60;
+      --grey:      #6C7A89;
+      --text:      #D8D4CD;
+      --serif:     'Georgia','Times New Roman',serif;
+      --sans:      'Arial','Helvetica Neue',sans-serif;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: var(--serif);
+      background: var(--navy);
+      color: var(--text);
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ─────────────────────────────────────────────── */
+    header {
+      text-align: center;
+      padding: 52px 24px 36px;
+      border-bottom: 1px solid var(--gold-line);
+    }
+    .channel-eyebrow {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+    .tool-title {
+      font-size: clamp(30px, 5.5vw, 48px);
+      color: var(--bone);
+      font-weight: normal;
+      line-height: 1.15;
+      margin-bottom: 18px;
+    }
+    .tool-subtitle {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--grey);
+      line-height: 1.7;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* ── LAYOUT ─────────────────────────────────────────────── */
+    .wrap {
+      max-width: 780px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-label {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 20px;
+      display: block;
+    }
+
+    /* ── SCREENS ─────────────────────────────────────────────── */
+    .screen { display: none; }
+    .screen.active { display: block; }
+
+    /* ── START SCREEN ─────────────────────────────────────────── */
+    #start { padding: 60px 0 52px; text-align: center; }
+
+    .intro-box {
+      background: var(--gold-dim);
+      border: 1px solid var(--gold-line);
+      border-radius: 3px;
+      padding: 28px 32px;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      text-align: left;
+    }
+    .intro-box p {
+      font-family: var(--sans);
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+    .intro-box p:last-child {
+      margin: 0;
+      color: var(--grey);
+      font-size: 13px;
+    }
+
+    .btn-start {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 17px 44px;
+      font-family: var(--sans);
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: opacity .2s;
+    }
+    .btn-start:hover { opacity: .88; }
+
+    .start-stats {
+      display: flex;
+      justify-content: center;
+      gap: 56px;
+      margin-top: 44px;
+    }
+    .stat-num {
+      display: block;
+      font-size: 30px;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+    .stat-lbl {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--grey);
+      letter-spacing: 1px;
+    }
+
+    /* ── QUIZ SCREEN ─────────────────────────────────────────── */
+    #quiz { padding: 52px 0; }
+
+    .progress-wrap { margin-bottom: 44px; }
+    .progress-meta {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--grey);
+      letter-spacing: 1px;
+      margin-bottom: 10px;
+    }
+    .progress-track {
+      height: 2px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 1px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--gold);
+      border-radius: 1px;
+      transition: width .45s ease;
+    }
+
+    .q-card {
+      background: var(--navy-card);
+      border: 1px solid rgba(212,175,55,0.13);
+      border-radius: 4px;
+      padding: 44px 40px 36px;
+    }
+    .q-num {
+      font-family: var(--sans);
+      font-size: 10px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 22px;
+    }
+    .q-text {
+      font-size: clamp(17px, 2.8vw, 23px);
+      color: var(--bone);
+      line-height: 1.5;
+      margin-bottom: 14px;
+    }
+    .q-hint {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--grey);
+      font-style: italic;
+      line-height: 1.65;
+      margin-bottom: 36px;
+    }
+    .answer-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .btn-ans {
+      border: 1px solid rgba(255,255,255,0.12);
+      background: transparent;
+      color: var(--text);
+      padding: 18px 20px;
+      font-family: var(--sans);
+      font-size: 14px;
+      cursor: pointer;
+      border-radius: 3px;
+      transition: all .18s;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .btn-ans .icon { font-size: 18px; }
+    .btn-ans.yes:hover, .btn-ans.yes.picked {
+      background: rgba(192,57,43,.14);
+      border-color: var(--red);
+      color: #E87878;
+    }
+    .btn-ans.no:hover, .btn-ans.no.picked {
+      background: rgba(39,174,96,.10);
+      border-color: var(--green);
+      color: #7DCEA0;
+    }
+
+    /* ── RESULTS SCREEN ──────────────────────────────────────── */
+    #results { padding: 52px 0 72px; }
+
+    /* Score gauge */
+    .score-block {
+      text-align: center;
+      margin-bottom: 52px;
+    }
+    .gauge-wrap {
+      position: relative;
+      width: 200px;
+      height: 200px;
+      margin: 24px auto 24px;
+    }
+    .gauge-wrap svg { transform: rotate(-90deg); }
+    .score-num {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 50px;
+      font-weight: bold;
+      color: var(--bone);
+      line-height: 1;
+    }
+    .score-num sup { font-size: 16px; color: var(--grey); }
+
+    .tier-badge {
+      display: inline-block;
+      padding: 8px 22px;
+      border-radius: 2px;
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      font-weight: bold;
+      margin-bottom: 28px;
+    }
+    .t-low      { background: rgba(39,174,96,.13);  color:#7DCEA0; border:1px solid #27AE60; }
+    .t-monitor  { background: rgba(212,175,55,.13); color:var(--gold); border:1px solid var(--gold); }
+    .t-alert    { background: rgba(230,126,34,.13); color:#F0A830; border:1px solid #E67E22; }
+    .t-critical { background: rgba(192,57,43,.14);  color:#E87878; border:1px solid var(--red); }
+
+    .tier-copy {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--text);
+      line-height: 1.75;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    .gold-rule {
+      border: none;
+      border-top: 1px solid var(--gold-line);
+      margin: 44px 0;
+    }
+
+    /* Flags */
+    .flags-list { display: flex; flex-direction: column; gap: 10px; }
+    .flag-item {
+      background: var(--navy-mid);
+      border-left: 3px solid var(--red);
+      padding: 11px 16px;
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    /* Episodes */
+    .ep-grid { display: flex; flex-direction: column; gap: 14px; }
+    .ep-card {
+      background: var(--navy-card);
+      border: 1px solid rgba(212,175,55,0.13);
+      border-radius: 3px;
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      text-decoration: none;
+      transition: border-color .2s;
+    }
+    a.ep-card:hover { border-color: var(--gold); }
+    .ep-card.dim { opacity: .5; cursor: default; }
+    .ep-tag {
+      font-family: var(--sans);
+      font-size: 9px;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      white-space: nowrap;
+      min-width: 40px;
+    }
+    .ep-info { flex: 1; }
+    .ep-title {
+      font-size: 14px;
+      color: var(--bone);
+      line-height: 1.4;
+      margin-bottom: 5px;
+    }
+    .ep-why {
+      font-family: var(--sans);
+      font-size: 12px;
+      color: var(--grey);
+      line-height: 1.5;
+    }
+    .ep-cta { font-family: var(--sans); font-size: 13px; color: var(--gold); white-space: nowrap; }
+    .ep-soon { font-family: var(--sans); font-size: 11px; color: var(--grey); font-style: italic; white-space: nowrap; }
+
+    /* PDF CTA box */
+    .pdf-box {
+      background: linear-gradient(135deg, rgba(212,175,55,.07) 0%, transparent 100%);
+      border: 1px solid var(--gold-line);
+      border-radius: 4px;
+      padding: 36px;
+      margin-bottom: 44px;
+      text-align: center;
+    }
+    .pdf-box h3 {
+      font-size: 21px;
+      color: var(--bone);
+      font-weight: normal;
+      margin-bottom: 12px;
+    }
+    .pdf-box p {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--grey);
+      line-height: 1.75;
+      margin-bottom: 26px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .pdf-links { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
+    .btn-pdf {
+      border: 1px solid var(--gold);
+      color: var(--gold);
+      background: transparent;
+      padding: 12px 22px;
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 2px;
+      text-decoration: none;
+      transition: background .2s;
+    }
+    .btn-pdf:hover { background: var(--gold-dim); }
+
+    /* Email capture */
+    .email-box {
+      background: var(--navy-card);
+      border: 1px solid rgba(212,175,55,0.16);
+      border-radius: 4px;
+      padding: 44px 36px;
+      text-align: center;
+      margin-bottom: 44px;
+    }
+    .email-box h3 {
+      font-size: 24px;
+      color: var(--bone);
+      font-weight: normal;
+      margin-bottom: 12px;
+    }
+    .email-box p {
+      font-family: var(--sans);
+      font-size: 13px;
+      color: var(--grey);
+      line-height: 1.8;
+      max-width: 440px;
+      margin: 0 auto 28px;
+    }
+    .email-row {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .email-in {
+      background: rgba(255,255,255,.05);
+      border: 1px solid rgba(255,255,255,.13);
+      color: var(--bone);
+      padding: 13px 18px;
+      font-family: var(--sans);
+      font-size: 14px;
+      border-radius: 2px;
+      width: 270px;
+      outline: none;
+      transition: border-color .2s;
+    }
+    .email-in:focus  { border-color: var(--gold); }
+    .email-in.err    { border-color: var(--red); }
+    .email-in::placeholder { color: var(--grey); }
+    .btn-sub {
+      background: var(--gold);
+      color: var(--navy);
+      border: none;
+      padding: 13px 26px;
+      font-family: var(--sans);
+      font-size: 13px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 2px;
+      white-space: nowrap;
+      transition: opacity .2s;
+    }
+    .btn-sub:hover { opacity: .88; }
+    .email-fine {
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--grey);
+      margin-top: 14px;
+    }
+
+    /* Restart */
+    .btn-restart {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.15);
+      color: var(--grey);
+      padding: 11px 26px;
+      font-family: var(--sans);
+      font-size: 12px;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all .2s;
+    }
+    .btn-restart:hover { border-color: var(--grey); color: var(--text); }
+    .center { text-align: center; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 28px 24px;
+      border-top: 1px solid rgba(255,255,255,.05);
+      font-family: var(--sans);
+      font-size: 11px;
+      color: var(--grey);
+      line-height: 1.8;
+    }
+    footer a { color: var(--gold); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 520px) {
+      .q-card { padding: 28px 20px 24px; }
+      .answer-row { grid-template-columns: 1fr; }
+      .start-stats { gap: 28px; }
+      .email-row { flex-direction: column; align-items: center; }
+      .email-in { width: 100%; max-width: 320px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ HEADER ══════════════════════════════════════════════════ -->
+<header>
+  <div class="wrap">
+    <div class="channel-eyebrow">The Busila Breakdown</div>
+    <h1 class="tool-title">The Business Fraud<br>Red Flag Checker</h1>
+    <p class="tool-subtitle">12 questions. 60 seconds. Find out if a business, investment, or startup is showing patterns that appeared in documented fraud cases.</p>
+  </div>
+</header>
+
+<main class="wrap">
+
+  <!-- ═══ START SCREEN ════════════════════════════════════════════ -->
+  <div id="start" class="screen active">
+    <div class="intro-box">
+      <span class="section-label">What this is</span>
+      <p>Each question here is drawn from a documented business collapse — Peloton, Frank/JPMorgan, Bancorex, Onco Filtration, and others. No generic checklist. Every red flag maps to a real case.</p>
+      <p>Takes about 60 seconds. No sign-up needed to see your score.</p>
+    </div>
+
+    <button class="btn-start" onclick="startQuiz()">START THE ASSESSMENT →</button>
+
+    <div class="start-stats">
+      <div>
+        <span class="stat-num">12</span>
+        <span class="stat-lbl">Red Flags</span>
+      </div>
+      <div>
+        <span class="stat-num">~60s</span>
+        <span class="stat-lbl">To Complete</span>
+      </div>
+      <div>
+        <span class="stat-num">Free</span>
+        <span class="stat-lbl">No Sign-Up</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ QUIZ SCREEN ══════════════════════════════════════════════ -->
+  <div id="quiz" class="screen">
+    <div class="progress-wrap">
+      <div class="progress-meta">
+        <span id="q-counter">Question 1 of 12</span>
+        <span id="q-pct">0% complete</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+      </div>
+    </div>
+
+    <div class="q-card">
+      <div class="q-num" id="q-num">Question 01</div>
+      <div class="q-text" id="q-text"></div>
+      <div class="q-hint" id="q-hint"></div>
+      <div class="answer-row">
+        <button class="btn-ans yes" id="btn-yes" onclick="answer(true)">
+          <span class="icon">⚠</span> Yes — this matches
+        </button>
+        <button class="btn-ans no" id="btn-no" onclick="answer(false)">
+          <span class="icon">✓</span> No / Not applicable
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ RESULTS SCREEN ══════════════════════════════════════════ -->
+  <div id="results" class="screen">
+
+    <!-- Score -->
+    <div class="score-block">
+      <span class="section-label">Your Fraud Risk Assessment</span>
+
+      <div class="gauge-wrap">
+        <svg width="200" height="200" viewBox="0 0 200 200">
+          <circle cx="100" cy="100" r="82"
+            fill="none"
+            stroke="rgba(255,255,255,0.06)"
+            stroke-width="13"/>
+          <circle cx="100" cy="100" r="82"
+            fill="none"
+            stroke-width="13"
+            stroke-linecap="round"
+            stroke-dasharray="515"
+            stroke-dashoffset="515"
+            id="gauge-arc"
+            style="transition: stroke-dashoffset 1.1s ease, stroke .4s ease;"/>
+        </svg>
+        <div class="score-num" id="score-num">0<sup>/100</sup></div>
+      </div>
+
+      <div class="tier-badge" id="tier-badge"></div>
+      <br>
+      <div class="tier-copy" id="tier-copy"></div>
+    </div>
+
+    <hr class="gold-rule">
+
+    <!-- Red flags list -->
+    <div id="flags-wrap" style="display:none">
+      <span class="section-label">Red Flags Found</span>
+      <div class="flags-list" id="flags-list"></div>
+      <hr class="gold-rule">
+    </div>
+
+    <!-- Episode recommendations -->
+    <div id="ep-wrap">
+      <span class="section-label">Episodes Worth Watching</span>
+      <div class="ep-grid" id="ep-grid"></div>
+    </div>
+
+    <hr class="gold-rule">
+
+    <!-- PDF case file CTA -->
+    <div class="pdf-box" id="pdf-box" style="display:none">
+      <h3>Go Deeper With the Case Files</h3>
+      <p>Each episode has a companion Case File PDF — full timeline, key player profiles, chart breakdowns, and research citations. 9 pages of analysis, $12.99 each.</p>
+      <div class="pdf-links" id="pdf-links"></div>
+    </div>
+
+    <!-- Email capture -->
+    <div class="email-box">
+      <h3>New episode every week.</h3>
+      <p>The Busila Breakdown documents business collapses, financial fraud, and the decisions that destroy billion-dollar companies. No fluff — just the story behind the numbers.</p>
+      <div class="email-row">
+        <input type="email" class="email-in" id="email-in" placeholder="your@email.com">
+        <button class="btn-sub" onclick="subscribe()">GET THE BREAKDOWN →</button>
+      </div>
+      <div class="email-fine">Weekly episodes. Unsubscribe any time.</div>
+    </div>
+
+    <div class="center" style="margin-bottom:28px">
+      <button class="btn-restart" onclick="restart()">← ASSESS A DIFFERENT COMPANY</button>
+    </div>
+
+  </div><!-- /results -->
+
+</main>
+
+<!-- ═══ FOOTER ═══════════════════════════════════════════════════ -->
+<footer>
+  <a href="https://www.youtube.com/@TheBusilaBreakdown" target="_blank" rel="noopener">YouTube</a> ·
+  <a href="https://www.instagram.com/thebusilabreakdown" target="_blank" rel="noopener">Instagram</a> ·
+  <a href="https://www.tiktok.com/@thebusilabreakdown" target="_blank" rel="noopener">TikTok</a> ·
+  <a href="https://www.facebook.com/profile.php?id=61570737475332" target="_blank" rel="noopener">Facebook</a> ·
+  <a href="https://andrewbusila.gumroad.com" target="_blank" rel="noopener">Case Files</a>
+  <br><br>
+  For educational and informational purposes only. Not financial, investment, or legal advice.<br>
+  © The Busila Breakdown. All editorial commentary represents the views of The Busila Breakdown alone.
+</footer>
+
+<!-- ═══ SCRIPT ═══════════════════════════════════════════════════ -->
+<script>
+
+// ── GO-LIVE DATES ──────────────────────────────────────────────
+const NOW = new Date();
+const EP13_LIVE = new Date('2026-08-04T00:00:00');
+const EP14_LIVE = new Date('2026-08-11T00:00:00');
+const EP15_LIVE = new Date('2026-08-18T00:00:00');
+
+// ── EPISODE DATABASE ───────────────────────────────────────────
+const EPISODES = {
+  ep07a: {
+    tag: 'EP 07',
+    title: "OpenAI Had a Legal Document Proving It Wasn't For Profit. Then They Changed It.",
+    why: "Covers how governance documents were quietly rewritten to benefit insiders — without public disclosure or shareholder input.",
+    url: 'https://youtu.be/SdR_PutmxCg',
+    pdfUrl: null,
+    available: true,
+    liveDate: null
+  },
+  ep08a: {
+    tag: 'EP 08',
+    title: "Jack Dorsey's Big Bet: The AI Claim That Changed Everything",
+    why: "Documents how 'AI-powered' became a valuation tool — and what the real numbers looked like behind the pitch.",
+    url: 'https://youtu.be/5YidGqxx7lw',
+    pdfUrl: null,
+    available: true,
+    liveDate: null
+  },
+  ep10: {
+    tag: 'EP 10',
+    title: "Peloton Was Worth $50 Billion. Then It Believed Its Own Story.",
+    why: "A case study in valuation built on narrative momentum — and what the inside looked like as it unravelled.",
+    url: 'https://youtu.be/_64EH7oQDkE',
+    pdfUrl: 'https://andrewbusila.gumroad.com',
+    available: true,
+    liveDate: null
+  },
+  ep12: {
+    tag: 'EP 12',
+    title: "Romania's $1 Billion Bank Collapse: Bancorex",
+    why: "How political connections replaced sound lending — and why the people most responsible faced no real consequences.",
+    url: 'https://youtu.be/I-aWfjdmhCE',
+    pdfUrl: 'https://andrewbusila.gumroad.com',
+    available: true,
+    liveDate: null
+  },
+  ep13: {
+    tag: 'EP 13',
+    title: "She Faked 4 Million Users. JPMorgan Paid $175 Million.",
+    why: "The Frank/Javice case — a $175M acquisition where the entire user base turned out to be fabricated data.",
+    url: 'https://www.youtube.com/@TheBusilaBreakdown',
+    pdfUrl: 'https://andrewbusila.gumroad.com',
+    available: NOW >= EP13_LIVE,
+    liveDate: 'August 4, 2026'
+  },
+  ep14: {
+    tag: 'EP 14',
+    title: "The AI Layoff Wave: When Corporations Blamed the Algorithm",
+    why: "How companies used 'AI is replacing us' as cover for workforce cuts driven by poor business fundamentals.",
+    url: 'https://www.youtube.com/@TheBusilaBreakdown',
+    pdfUrl: null,
+    available: NOW >= EP14_LIVE,
+    liveDate: 'August 11, 2026'
+  },
+  ep15: {
+    tag: 'EP 15',
+    title: "Theranos 2.0: The $26 Million Cancer Test That Never Existed",
+    why: "The SEC alleges Onco Filtration raised $26M+ claiming to detect 200 cancer types from a blood draw — while the device never reached clinical trials.",
+    url: 'https://www.youtube.com/@TheBusilaBreakdown',
+    pdfUrl: 'https://andrewbusila.gumroad.com',
+    available: NOW >= EP15_LIVE,
+    liveDate: 'August 18, 2026'
+  }
+};
+
+// ── QUESTION BANK ──────────────────────────────────────────────
+const QUESTIONS = [
+  {
+    n: 1,
+    text: "Does the company promise technology or scientific results that have never been independently tested, peer-reviewed, or externally verified?",
+    hint: "Think: clinical trials that haven't started, patents with no independent replication, demos that only work in-house.",
+    flag: "Unverified breakthrough technology claims",
+    eps: ['ep15']
+  },
+  {
+    n: 2,
+    text: "Has the company raised significant money from individual investors while consistently avoiding detailed, audited financial disclosure?",
+    hint: "Private companies aren't required to publish everything — but repeated opacity about where money actually goes is a different pattern entirely.",
+    flag: "Fundraising with limited financial transparency",
+    eps: ['ep15', 'ep12']
+  },
+  {
+    n: 3,
+    text: "Is one person in control of both operations and company finances, with no meaningful board oversight or independent checks?",
+    hint: "Founders with unchecked dual control over cash flows and business operations have historically been the highest-risk single point of failure.",
+    flag: "Single person controls operations and finances",
+    eps: ['ep15', 'ep13']
+  },
+  {
+    n: 4,
+    text: "Are there unexplained personal expenses — luxury purchases, personal credit card debts, or cash withdrawals — charged to the company?",
+    hint: "Company vehicles 'for business use,' personal real estate costs buried in company accounts, credit card debt reimbursements.",
+    flag: "Unexplained personal expenses on company accounts",
+    eps: ['ep15']
+  },
+  {
+    n: 5,
+    text: "Has the company claimed a user base, customer count, or revenue figure that is significantly larger than independent data or observers suggest?",
+    hint: "Not optimistic projections — a material gap between the claimed number and what any outsider can verify.",
+    flag: "Inflated user, customer, or revenue metrics",
+    eps: ['ep13']
+  },
+  {
+    n: 6,
+    text: "Did the company's valuation climb 5x or 10x in a short period — without proportional growth in actual revenue or profitability?",
+    hint: "A valuation premium can be a bet on the future. When it is backed primarily by narrative and press coverage, it has nowhere to go but down.",
+    flag: "Valuation growth far outpacing business fundamentals",
+    eps: ['ep10']
+  },
+  {
+    n: 7,
+    text: "Have founders or top executives been selling large blocks of personal stock while publicly promoting the company's bright future?",
+    hint: "Insider selling is routine and legal. The red flag is significant-scale personal selling while loudly endorsing the investment to others.",
+    flag: "Executive stock sales while publicly promoting growth",
+    eps: ['ep10']
+  },
+  {
+    n: 8,
+    text: "Does the company use 'AI-powered,' 'machine learning,' or 'proprietary algorithm' as a core value driver — without concrete technical documentation?",
+    hint: "Real AI implementations can be described with technical specifics. Vague buzzword deployment with no supporting detail is a known valuation inflation tactic.",
+    flag: "Unsubstantiated AI or technology claims",
+    eps: ['ep08a', 'ep14']
+  },
+  {
+    n: 9,
+    text: "Has the company changed key legal documents, its governance structure, or a nonprofit mission in ways that primarily benefit insiders or leadership?",
+    hint: "Quiet restructuring of board control, IP ownership, or profit rights — especially when announced after the fact, or not announced at all.",
+    flag: "Governance document changes benefiting insiders",
+    eps: ['ep07a']
+  },
+  {
+    n: 10,
+    text: "Does the company rely on political connections, regulatory proximity, or government relationships to avoid normal market or compliance scrutiny?",
+    hint: "Lobbying is standard. The red flag is when political protection becomes a substitute for financial viability or legitimate underwriting.",
+    flag: "Political connections substituting for business legitimacy",
+    eps: ['ep12']
+  },
+  {
+    n: 11,
+    text: "Is the company's public success story driven primarily by press coverage and narrative — with independently audited financial results notably absent?",
+    hint: "Great PR is a business tool. When it becomes the main product, and the actual financials stay hidden, it is a warning sign with a track record.",
+    flag: "Success story built on narrative, not audited results",
+    eps: ['ep13', 'ep10']
+  },
+  {
+    n: 12,
+    text: "Does the company make audaciously broad claims — curing disease, disrupting multiple industries, solving global problems — with limited verifiable progress?",
+    hint: "Ambition is fine. The pattern is: massive, category-spanning promises + few independently confirmed milestones + continued fundraising rounds.",
+    flag: "Sweeping claims without verifiable milestones",
+    eps: ['ep15', 'ep08a']
+  }
+];
+
+// ── STATE ──────────────────────────────────────────────────────
+let qi = 0;
+let answers = [];
+let locked = false;
+
+// ── HELPERS ────────────────────────────────────────────────────
+function show(id) {
+  ['start','quiz','results'].forEach(s => {
+    const el = document.getElementById(s);
+    if (el) {
+      el.classList.toggle('active', s === id);
+    }
+  });
+}
+
+function padTwo(n) { return String(n).padStart(2,'0'); }
+
+// ── QUIZ CONTROL ───────────────────────────────────────────────
+function startQuiz() {
+  qi = 0;
+  answers = [];
+  show('quiz');
+  renderQ();
+}
+
+function renderQ() {
+  const q = QUESTIONS[qi];
+  const pct = Math.round((qi / QUESTIONS.length) * 100);
+
+  document.getElementById('q-counter').textContent = `Question ${qi + 1} of ${QUESTIONS.length}`;
+  document.getElementById('q-pct').textContent = `${pct}% complete`;
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('q-num').textContent = `Question ${padTwo(q.n)}`;
+  document.getElementById('q-text').textContent = q.text;
+  document.getElementById('q-hint').textContent = q.hint;
+
+  document.getElementById('btn-yes').classList.remove('picked');
+  document.getElementById('btn-no').classList.remove('picked');
+  locked = false;
+}
+
+function answer(isYes) {
+  if (locked) return;
+  locked = true;
+
+  document.getElementById(isYes ? 'btn-yes' : 'btn-no').classList.add('picked');
+  answers.push(isYes);
+
+  setTimeout(() => {
+    qi++;
+    if (qi < QUESTIONS.length) {
+      renderQ();
+    } else {
+      buildResults();
+      show('results');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  }, 300);
+}
+
+// ── RESULTS BUILDER ────────────────────────────────────────────
+function buildResults() {
+  const yesCount = answers.filter(Boolean).length;
+  const score = Math.round((yesCount / QUESTIONS.length) * 100);
+
+  // Animate gauge
+  animateGauge(score);
+
+  // Tier
+  let tier, tierCls, copy;
+  if (score <= 24) {
+    tier = 'LOW RISK';
+    tierCls = 't-low';
+    copy = 'The signals here are relatively clean. No checklist is exhaustive — keep watching the fundamentals over time. A single red flag in context is different from a cluster. The full picture always matters more than any one indicator.';
+  } else if (score <= 49) {
+    tier = 'MONITOR';
+    tierCls = 't-monitor';
+    copy = "There are patterns here worth watching. None of these flags alone proves fraud — but several of them, particularly around transparency and verifiable claims, have appeared together in documented cases. Don't commit more than you can afford to lose without deeper independent research.";
+  } else if (score <= 74) {
+    tier = 'HIGH ALERT';
+    tierCls = 't-alert';
+    copy = "Multiple serious patterns present simultaneously. The combination of flags here mirrors documented fraud cases more closely than coincidence suggests. This does not confirm wrongdoing — but the risk profile is elevated enough to warrant significant caution and independent due diligence before any commitment.";
+  } else {
+    tier = 'CRITICAL';
+    tierCls = 't-critical';
+    copy = "This profile is consistent with documented business fraud. The concentration of red flags — particularly around financial control, unverifiable claims, and opacity — matches patterns from cases that later ended in SEC enforcement actions or criminal proceedings. Extreme caution is warranted.";
+  }
+
+  document.getElementById('tier-badge').textContent = tier;
+  document.getElementById('tier-badge').className = 'tier-badge ' + tierCls;
+  document.getElementById('tier-copy').textContent = copy;
+
+  // Flags list
+  const triggered = QUESTIONS.filter((q, i) => answers[i] === true);
+  const flagsWrap = document.getElementById('flags-wrap');
+  if (triggered.length > 0) {
+    flagsWrap.style.display = 'block';
+    document.getElementById('flags-list').innerHTML =
+      triggered.map(q => `<div class="flag-item">⚠ ${q.flag}</div>`).join('');
+  } else {
+    flagsWrap.style.display = 'none';
+  }
+
+  // Episode recommendations
+  const epSet = new Set();
+  triggered.forEach(q => q.eps.forEach(id => epSet.add(id)));
+
+  // Always recommend at least two episodes
+  if (epSet.size === 0) {
+    epSet.add('ep10');
+    epSet.add('ep13');
+  }
+
+  // Sort: available episodes first, then unavailable
+  const sorted = Array.from(epSet).sort((a, b) => {
+    const av = EPISODES[a] && EPISODES[a].available ? 0 : 1;
+    const bv = EPISODES[b] && EPISODES[b].available ? 0 : 1;
+    return av - bv;
+  });
+
+  document.getElementById('ep-grid').innerHTML = sorted.map(id => {
+    const ep = EPISODES[id];
+    if (!ep) return '';
+    if (ep.available) {
+      return `<a href="${ep.url}" target="_blank" rel="noopener" class="ep-card">
+        <div class="ep-tag">${ep.tag}</div>
+        <div class="ep-info">
+          <div class="ep-title">${ep.title}</div>
+          <div class="ep-why">${ep.why}</div>
+        </div>
+        <div class="ep-cta">Watch →</div>
+      </a>`;
+    } else {
+      return `<div class="ep-card dim">
+        <div class="ep-tag">${ep.tag}</div>
+        <div class="ep-info">
+          <div class="ep-title">${ep.title}</div>
+          <div class="ep-why">${ep.why}</div>
+        </div>
+        <div class="ep-soon">Live ${ep.liveDate}</div>
+      </div>`;
+    }
+  }).join('');
+
+  // PDF CTA — show for Monitor and above
+  const pdfBox = document.getElementById('pdf-box');
+  if (score > 24) {
+    pdfBox.style.display = 'block';
+    const pdfEps = sorted.filter(id => EPISODES[id] && EPISODES[id].pdfUrl && EPISODES[id].available);
+    const pdfLinksEl = document.getElementById('pdf-links');
+    if (pdfEps.length > 0) {
+      pdfLinksEl.innerHTML = pdfEps.map(id => {
+        const ep = EPISODES[id];
+        return `<a href="${ep.pdfUrl}" target="_blank" rel="noopener" class="btn-pdf">${ep.tag} Case File — $12.99</a>`;
+      }).join('');
+    } else {
+      pdfLinksEl.innerHTML = `<a href="https://andrewbusila.gumroad.com" target="_blank" rel="noopener" class="btn-pdf">Browse All Case Files →</a>`;
+    }
+  } else {
+    pdfBox.style.display = 'none';
+  }
+
+  // Reset email field
+  const emailEl = document.getElementById('email-in');
+  emailEl.value = '';
+  emailEl.classList.remove('err');
+}
+
+// ── GAUGE ANIMATION ────────────────────────────────────────────
+function animateGauge(target) {
+  const arc = document.getElementById('gauge-arc');
+  const numEl = document.getElementById('score-num');
+  const circ = 515;
+
+  // Color
+  let color;
+  if (target <= 24)      color = '#27AE60';
+  else if (target <= 49) color = '#D4AF37';
+  else if (target <= 74) color = '#E67E22';
+  else                   color = '#C0392B';
+
+  arc.style.stroke = color;
+
+  let cur = 0;
+  const step = Math.max(1, Math.ceil(target / 45));
+  const iv = setInterval(() => {
+    cur = Math.min(cur + step, target);
+    numEl.innerHTML = cur + '<sup>/100</sup>';
+    arc.style.strokeDashoffset = circ - (cur / 100) * circ;
+    if (cur >= target) clearInterval(iv);
+  }, 22);
+}
+
+// ── EMAIL SUBSCRIBE ────────────────────────────────────────────
+function subscribe() {
+  const el = document.getElementById('email-in');
+  const val = el.value.trim();
+  if (!val || !val.includes('@') || !val.includes('.')) {
+    el.classList.add('err');
+    el.focus();
+    return;
+  }
+  el.classList.remove('err');
+  window.open(
+    'https://thebusilabreakdown.beehiiv.com/subscribe?email=' + encodeURIComponent(val),
+    '_blank',
+    'noopener,noreferrer'
+  );
+}
+
+// Allow Enter key in email field
+document.addEventListener('DOMContentLoaded', () => {
+  document.getElementById('email-in').addEventListener('keydown', e => {
+    if (e.key === 'Enter') subscribe();
+  });
+});
+
+// ── RESTART ────────────────────────────────────────────────────
+function restart() {
+  qi = 0;
+  answers = [];
+
+  // Reset gauge visually
+  document.getElementById('gauge-arc').style.strokeDashoffset = '515';
+  document.getElementById('gauge-arc').style.stroke = 'transparent';
+  document.getElementById('score-num').innerHTML = '0<sup>/100</sup>';
+  document.getElementById('flags-wrap').style.display = 'none';
+  document.getElementById('pdf-box').style.display = 'none';
+
+  show('start');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+</script>
+</body>
+</html>
