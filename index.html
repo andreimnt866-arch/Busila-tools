@@ -599,7 +599,7 @@
     <!-- PDF case file CTA -->
     <div class="pdf-box" id="pdf-box" style="display:none">
       <h3>Go Deeper With the Case Files</h3>
-      <p>Each episode has a companion Case File PDF — full timeline, key player profiles, chart breakdowns, and research citations. 9 pages of analysis, $12.99 each.</p>
+      <p>Each episode has a companion Case File PDF — full timeline, key player profiles, chart breakdowns, and research citations. 9 pages of analysis each.</p>
       <div class="pdf-links" id="pdf-links"></div>
     </div>
 
@@ -951,7 +951,7 @@ function buildResults() {
     if (pdfEps.length > 0) {
       pdfLinksEl.innerHTML = pdfEps.map(id => {
         const ep = EPISODES[id];
-        return `<a href="${ep.pdfUrl}" target="_blank" rel="noopener" class="btn-pdf">${ep.tag} Case File — $12.99</a>`;
+        return `<a href="${ep.pdfUrl}" target="_blank" rel="noopener" class="btn-pdf">${ep.tag} Case File</a>`;
       }).join('');
     } else {
       pdfLinksEl.innerHTML = `<a href="https://andrewbusila.gumroad.com" target="_blank" rel="noopener" class="btn-pdf">Browse All Case Files →</a>`;
